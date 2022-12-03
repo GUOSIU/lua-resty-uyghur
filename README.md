@@ -1,3 +1,36 @@
+
+# lua-resty-uyghur
+
+## 依赖 Lua UTF8 库
+https://github.com/starwing/luautf8
+
+## Lua实现 维吾尔语，哈萨克语，柯尔克孜语基本区和扩展区转换函数类库
+## 不支持 mb4
+
+## 实例
+
+```lua
+
+    local uyghur = require "resty.uyghur"
+
+    ngx.header["content-type"] = "text/plain"
+
+    local source  = "[中国>abc[جۇسەي.تۇخۇم]123<新疆]"
+    local extend  = uyghur.basic2Extend(source)     -- 基本区 --转换-> 扩展区
+    local basic   = uyghur.extend2Basic(extend)     -- 扩展区 --转换-> 基本区
+    local rextend = uyghur.basic2RExtend(source)    -- 基本区 --转换-> 反向扩展区
+    local rbasic  = uyghur.rextend2Basic(rextend)   -- 反向扩展区 --转换-> 基本区
+
+    ngx.say("source  : ", source)   -- [中国>abc[جۇسەي.تۇخۇم]123<新疆]
+    ngx.say("extend  : ", extend)   -- [中国>abc[ﺟﯘﺳﻪﻱ.ﺗﯘﺧﯘﻡ]123<新疆]
+    ngx.say("rextend : ", rextend)  -- [123>新疆[ﻡﯘﺧﯘﺗ.ﻱﻪﺳﯘﺟ]中国<abc]
+
+    ngx.say(source == basic)        -- true
+    ngx.say(source == rbasic)       -- true
+
+```
+
+# -----------------------------------------------------------------------------------
 # UyghurCharUtils
 
 ### 项目介绍
@@ -95,7 +128,7 @@ Kerindax，Sherer，Bulut
 
   $target3 = $utils->Basic2RExtend($source);//基本区 转换 反向扩展区
   $target4 = $utils->RExtend2Basic($target3);//反向扩展区 转换 基本区
-	
+
 	echo $target1."<br/>";
 	echo $target2."<br/>";
 
