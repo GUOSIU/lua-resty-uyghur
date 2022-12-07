@@ -2,11 +2,12 @@
 # lua-resty-uyghur
 
 ## 依赖 Lua UTF8 库
-https://github.com/starwing/luautf8
+- https://github.com/starwing/luautf8
+- https://luarocks.org/modules/xavier-wang/luautf8
 
 ## 说明
 - Lua实现 维吾尔语，哈萨克语，柯尔克孜语基本区和扩展区转换函数类库
-- 不支持 mb4
+- 支持 mb4
 
 ## 实例
 
